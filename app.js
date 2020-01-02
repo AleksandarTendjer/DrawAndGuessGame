@@ -43,7 +43,7 @@ var GameVariable = {
 
 //timer for the round
 var _timer = {
-	threeMinTimer: null
+	sixtyTimer: null
 }
 
 
@@ -87,7 +87,57 @@ app.use(router);
 
   app.use(express.static(path.join(__dirname, "public")));
 
+/*****************************************************/
+/********************SOCKET CONTROLS*************************/
+/*****************************************************/
 
+  io.sockets.on("connection", function(socket){
+
+  	// when a user connects to websockets
+  	 socket.on("online", function(data){
+      		var data = JSON.parse(data);
+      		name = data.username;
+      		userId = data.userId;
+      		//updating user list to client
+      		users.push(data.username);
+
+      		//Initialization points of the game  for users
+      		GameVariable.endScore.push([name, userId, 0, 0, 0, 0, 0]);
+
+      		// socke for user that is online
+      		clients[data.username] = socket;
+
+      		// send to everzone that the user is online
+      		socket.broadcast.emit("system message", "【" + name + "】已经进入房间", "add");
+
+      		// update data of users in the room
+          // and u
+      		getOnline();
+      		getPlayer();
+
+      		// update on sixty secconds
+      		// clear tieout will be on 60 secconds
+      		clearTimeout(_timer.sixtyTimer);
+  	});
+
+  	// get user data on the network
+  	function getOnline(){
+  		 game.online(users, function(list){
+  			for(var index in clients){
+  				clients[index].emit("online list", list);
+  				clients[index].emit("room member", list);
+  			}
+  		});
+  	}
+
+  	// get player data
+  	function getPlayer(){
+  		var data = {"name": name, "userId": userId};
+  		clients[name].emit("player data", data);
+  	}
+
+
+  	
 
 
 

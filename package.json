@@ -1,0 +1,32 @@
+{
+  "name": "drawandguessgame",
+  "version": "1.0.0",
+  "description": "faculty project for Web Technologies class",
+  "main": "dbOperations.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cookieparser": "^0.1.0",
+    "ejs": "*",
+    "express": "*",
+    "logger": "0.0.1",
+    "method-override": "^3.0.0",
+    "mongoose": "*",
+    "morgan": "^1.9.1",
+    "socket.io": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleksandarTendjer/DrawAndGuessGame.git"
+  },
+  "author": "Aleksandar Tendjer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AleksandarTendjer/DrawAndGuessGame/issues"
+  },
+  "homepage": "https://github.com/AleksandarTendjer/DrawAndGuessGame#readme"
+}
