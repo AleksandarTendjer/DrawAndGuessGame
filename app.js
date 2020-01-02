@@ -15,7 +15,7 @@ var express = require("express"),
   logger=require("morgan"),
 
   //game = require("./controller"),
-	gameDao = require("./dbOperations");
+	gameDbO = require("./dbOperations");
 
 var app = express(),
 	server = http.createServer(app),
@@ -136,11 +136,87 @@ app.use(router);
   		clients[name].emit("player data", data);
   	}
 
+    /*********************CHAT SECTION******************************/
+    	//PUBLIC INFO
+    	socket.on("public message", function(avatorId, name, msg, callback){
+    		callback(true);
 
-  	
+    		if(msg != GameVariable.word[0]){
+    			// can send mesgs to everyone except myself
+    			socket.broadcast.emit("public message", userId, name, msg);
+    		}else{
+    			msg = "Congratulations" + name + "has answered the question correctly!";
+    			GameVariable.correctGuess++;
+
+    			// statistics
+    			scoreCount({
+    				type: "word",
+    				name: name,
+    				userId: userId
+    			});
+
+    			// send msg to everyone including myself
+    			for(var index in clients){
+    				clients[index].emit("correct answer", name, msg);
+    			}
+    			// everyone has correctly guessed
+    			if(GameVariable.correctGuess == users.length-1){
+    				console.log("everyoe is correct");
+    				scoreSend();
+    				// start the game automaticcally(next round)
+            //start the game and set the timeout to 5000 ms
+    				setTimeout(function(){
+    					startGame("next game");
+    				}, 5000);
+
+    				GameVariable.correctGuess = 0;
+    			}
+    		}
+    	});
+
+    	//PRIVATE MESSAGE
+    	socket.on("private message",function(to, avatorId, msg, callback){
+    		var target = clients[to];
+    		if (target) {
+    			target.emit("private message", name+"[private message]", avatorId, msg);
+    			callback(true);
+    		}
+    		else {
+    			socket.emit("message error", to, msg);
+    			callback(false);
+    		}
+    	});
+
+    	// systen message
+    	socket.on("system message", function(msg, detail){
+    		for(var index in clients){
+    			clients[index].emit("system message", msg, detail);
+    		}
+    	});
 
 
 
+
+
+
+
+
+
+    	// going offline
+    	socket.on("offline", function(user){
+    		socket.disconnect();
+    	});
+
+});
+
+gameDbO.connect(function(error){
+  if(error) throw error;
+});
+
+//when exiting the app close the connection
+app.on("close", function(error){
+  gameDbO.disconnect(function(err){});
+});
 
 // 5. listen on the port
 server.listen(app.get("port"), function(){
