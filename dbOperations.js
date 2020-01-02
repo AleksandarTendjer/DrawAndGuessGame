@@ -11,9 +11,9 @@ var dburl = 'mongodb://localhost:27017/ToDoDatabase' // link  to MongoDB
 
 var mongoose = require('mongoose');
 //user scheme
-var User = require('../models/user.js');
+var User = require('./models/user.js');
 //room scheme
-var Room = require('../models/room.js');
+var Room = require('./models/room.js');
 
 exports.connect = function(){
 	mongoose.connect(dburl)
