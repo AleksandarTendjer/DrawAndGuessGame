@@ -1,7 +1,7 @@
 <form method="POST" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="name">Name</label>
-									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<input id="name" type="text" class="form-control" name="username" required autofocus>
 									<div class="invalid-feedback">
 										What's your name?
 									</div>
@@ -39,6 +39,6 @@
 									</button>
 								</div>
 								<div class="mt-4 text-center">
-									Already have an account? <a href="index.html">Login</a>
+									Already have an account? <a onclick='debugger; $("#cardBody").innerHTML="";	$("#cardBody").load("views/components/login/loginForm.html");'>Login</a>
 								</div>
 							</form>
