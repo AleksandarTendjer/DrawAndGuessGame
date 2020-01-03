@@ -66,7 +66,7 @@ function normalizePort(val) {
 // 2. app configuratiion
 var port = normalizePort(process.env.PORT || '3000');
   app.set('port', port);
-	app.set("views", __dirname + "public/views");
+	app.set("views", __dirname + "/public/views");
 	app.set("view engine", "ejs");
 
 	//app.use(express.logger("dev"));
@@ -376,8 +376,32 @@ app.use(router);
 
 
 
+      // statistics for the right answer
+      socket.on("score", function(data){
+        scoreCount(data);
+      });
+      function scoreCount(data){
+        var drawer = GameVariable.drawer;	//drawing
+        console.log("score statistics：drawer "+drawer);
+        console.log("score statistics：name "+data.name);
 
-      
+        for(var i=0; i<GameVariable.endScore.length; i++){
+          // additional scores for room members
+          if(data.name == GameVariable.endScore[i][0]){
+            console.log("user: "+GameVariable.endScore[i][0]);
+            GameVariable.endScore[i][6] += 1;
+            continue;
+          }
+
+          /*if(drawer == GameVariable.endScore[i][0]){
+            GameVariable.endScore[i][type] += 1;
+            continue;
+          } */
+        }
+
+        console.log("result ！！！！！！！！！！！- "+GameVariable.endScore);
+      }
+
 
     	// going offline
     	socket.on("offline", function(user){
@@ -385,6 +409,50 @@ app.use(router);
     	});
 
 });
+/*********************************************/
+/*******************URL SECTION************************/
+/*********************************************/
+
+app.get("/", function(req, res){
+  //if no cookies redirect to login page
+	if(!req.headers.cookie){
+		res.redirect("/login");
+		return false;
+	}
+  //if there are cookies
+	console.log(req.headers.cookie);
+  //split cookie info by ;
+	var cookies = req.headers.cookie.split("; ");
+	var isSign = false;
+  //if length of cookies
+	for(var i=0; i<cookies.length; i++){
+		cookie = cookies[i].split("=");
+		console.log(cookie[i]);
+    //if username is not empty
+		if(cookie[0]=="username" && cookie[1]!=""){
+      //already signed in
+      isSign = true;
+			break;
+		}
+	}
+  //if not signed in
+	if(!isSign){
+    //set him on login
+		res.redirect("/login");
+		return false;
+	}
+	res.redirect("/index");
+});
+
+app.get("/login", function(req, res){
+	//res.sendfile(path.resolve("views/login.html"));
+//  res.render('public/views/index.html');
+  res.render('login');
+});
+
+
+
+
 
 gameDbO.connect(function(error){
   if(error) throw error;

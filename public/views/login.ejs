@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Draw and Guess game</title>
+
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+	<div class="container h-100">
+		<div class="row justify-content-md-center h-100">
+			<div class="card-wrapper">
+				<div class="brand">
+					<img src="img/login.png" alt="logo">
+				</div>
+				<div class="card fat">
+					<div class="card-body" id="cardBody">
+
+					</div>
+					<!--<script>
+$( "#new-projects" ).load( "/resources/load.html #projects li" );
+</script>-->
+
+					<%- include ('components/login/loginForm.html') %>
+
+
+				<div class="footer">
+					Copyright &copy; 2017 &mdash; Your Company
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+	<!--<div class="wrapper">
+		<section class="login_form_wrapper flip">
+			<h1 class="logo"></h1>
+			<div class="form_title cf">
+        <!--add onclick to add elements(login or register to form_wrap)
+        <script>
+          $(function () {
+            $("head").load("../static/imports.html")
+          });
+
+        </script>
+
+        <span class="login active" onclick="">login</span>
+				<span class="join"onclick="">Register</span>
+			</div>
+			<div class="line"></div>
+
+			<div class="transform cf">
+				<div class="form_wrap">
+          LOGIN OR REGISTER
+
+				</div>
+
+			</div>
+		</section>
+	</div>
+
+<script>
+	seajs.use("./js/login.js", function(app){
+		app.init();
+	});
+</script> -->
+<script src="js/login.js"></script>
+</body>
+</html>
