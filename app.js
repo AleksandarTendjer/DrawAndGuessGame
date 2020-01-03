@@ -336,12 +336,48 @@ app.use(router);
         return GameVariable;
       }
 
-      // 获取随机关键词
+      // get the random word to draw
       function getWord(){
         var pos = Math.floor(Math.random() * gameWord.word.length);
         return gameWord.word[pos];
       }
 
+      // next game
+    	socket.on("next game", function(){
+    		//   show answer
+    		scoreSend();
+
+    		setTimeout(function(){
+    			startGame("next game");
+    		}, 5100);
+    	});
+
+      // send score on every round
+      function scoreSend(){
+        var pos = 0;
+        for(var i=0; i<GameVariable.endScore.length; i++){
+          if(GameVariable.drawer == GameVariable.endScore[i][0]){
+            pos = i;
+            break;
+          }
+        }
+
+        var scoreData = {
+          num: GameVariable.endScore[pos][2],
+          word: GameVariable.word[0]
+        }
+        console.log(GameVariable.endScore);
+        for(var index in clients){
+          clients[index].emit("show answer", scoreData);
+        }
+        // set sixty timer
+        clearTimeout(_timer.sixtyTimer);
+      }
+
+
+
+
+      
 
     	// going offline
     	socket.on("offline", function(user){
