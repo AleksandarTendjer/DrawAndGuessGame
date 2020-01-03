@@ -195,11 +195,152 @@ app.use(router);
     	});
 
 
+      //DISCONNECT THE USER
+      socket.on("disconnect", function(){
+        console.log("disconnect");
+        setTimeout(function(){
+          for(var index in clients){
+            if(clients[index] == socket){
+              // remove the score if the client is found
+              var gameScore = GameVariable.endScore;
+              for(var i=0; i<gameScore.length; i++){
+                if(index == gameScore[i][0]){
+                  GameVariable.endScore.splice(i, 1);
+                  break;
+                }
+              }
+
+              // delete the offline user
+              users.splice(users.indexOf(index), 1);
+
+              // delete the socket that went offline
+              delete clients[index];
+              socket.broadcast.emit("system message", "【"+name + "left", "sub");
+              game.online(users, function(list){
+                for(var index_online in clients){
+                  clients[index_online].emit("online list", JSON.stringify(list));
+                  clients[index_online].emit("room member", JSON.stringify(list));
+                }
+
+              });
+              break;
+            }
+          }
+        }, 100);
+      });
+      // start the first game-it was not played before
+    	socket.on("start game", function(callback){
+    		if(users.length == 1){
+    			callback();
+    			return false;
+    		}
+    		// callback();
+    		startGame("start game");
+    	});
+/*******************GAME LOGIC************************/
+      //method that is called on every round
+      function startGame(method){
+        //start the first game or the next round
+        var _method = method || "next game";
+        var data = dataBuild();
+        //if the method is start game it is most definitelly
+        //the 1st round
+        if(method == "start game"){
+          GameVariable.lastOne = false;
+        }
+
+        if(!GameVariable.lastOne){
+          // not the last one(means that the method is not start game)
+          for(var index in clients){
+            clients[index].emit(_method, data);
+          }
+        }else{
+          //the last user finished with the drawing
+          GameVariable.start = false;
+          // setTimeout(function(){
+            // show the table
+            for(var index in clients){
+              clients[index].emit("end game", GameVariable.endScore);
+            }
+            // for  every user that was in the room give the
+            for(var i=0; i<GameVariable.endScore.length; i++){
+              GameVariable.endScore[i].splice(2, 4, 0, 0, 0, 0, 0);
+            }
+            // initialization
+            extend(GameVariable, {
+              error: false,
+              start: false,
+              word: [],
+              drawer: "",
+              correctGuess: 0,
+              lastOne: false
+            });
+
+            // clearing the timeout
+            clearTimeout(_timer.sixtyTimer);
+          // }, 5000);
+          setTimeout(function(){
+            // 5s timeout
+            getOnline();
+          }, 5000);
+        }
+        // send score after timeout
+        clearTimeout(_timer.sixtyTimer);
+        _timer.sixtyTimer = setTimeout(function(){
+          // return to results
+          scoreSend();
+          // start the next game
+          setTimeout(function(){
+            startGame("next game");
+          }, 5000);
+        }, 60000);
 
 
 
 
 
+      }
+
+      // set the data for session
+      function dataBuild(){
+        GameVariable.start = true;
+        GameVariable.word = getWord();
+        console.log("current user to draw "+GameVariable.drawer);
+        console.log("currently online users "+users.length);
+        console.log("first user"+users);
+
+        // current drawer set
+        if(GameVariable.drawer == ""){
+          // if there was no drawer before set it to the first element
+          GameVariable.drawer = users[0];
+          console.log("first drawer-----------"+GameVariable.drawer);
+        }else{
+          console.log("currentDrawer:"+GameVariable.drawer);
+          var currentDrawer = GameVariable.drawer;
+          for(var i=0; i<users.length; i++){
+            if(currentDrawer == users[i] && i != users.length-1){
+              console.log("next drawer->usres[i+1]"+users[i+1]);
+              GameVariable.drawer = users[i+1];
+              break;
+            }
+            //we got to the last element
+            if(i == users.length-1){
+              console.log("the last drawer for this game")
+              GameVariable.lastOne = true;
+              break;
+            }
+          }
+        }
+        console.log("go ahead-------------------------")
+        console.log(GameVariable)
+        return GameVariable;
+      }
+
+      // 获取随机关键词
+      function getWord(){
+        var pos = Math.floor(Math.random() * gameWord.word.length);
+        return gameWord.word[pos];
+      }
 
 
     	// going offline
