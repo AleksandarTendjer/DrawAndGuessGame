@@ -13,6 +13,8 @@ var express = require("express"),
   cookieParser=require("cookie-parser"),
   methodOverride=require("method-override"),
   logger=require("morgan"),
+  user=require('./routes/user.js'),
+  room=require('./routes/room.js'),
 
   //game = require("./controller"),
 	gameDbO = require("./dbOperations");
@@ -78,7 +80,11 @@ app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(cookieParser("draw"));
 
-	//app.use(methodOverride());
+//adding routes for user and room operations
+app.use('/users', user);
+app.use('/rooms', room);
+
+  //app.use(methodOverride());
   // override with the X-HTTP-Method-Override header in the request
   app.use(methodOverride('X-HTTP-Method-Override'));
 
@@ -447,10 +453,11 @@ app.get("/", function(req, res){
 app.get("/login", function(req, res){
 	//res.sendfile(path.resolve("views/login.html"));
 //  res.render('public/views/index.html');
+
   res.render('login');
 });
 
-
+//other actions are added in routes !
 
 
 

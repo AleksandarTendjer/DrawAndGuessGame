@@ -45,11 +45,11 @@ exports.add = function(data, callback){
 	userEntity.userId = data.userId;
 
 	// if somebody is registered with this username, it should not be used yet again
-	exports.findByusername(data.username, function(error, gamer){
+	exports.findByusername(data.username, function(error, user){
 	    if(error){
 	    	console.log(error);
 	    }else{
-	    	if(!gamer){
+	    	if(!user){
 	    		userEntity.save(function(error){
 					if(error){
 						console.log("error in registering" + error);
@@ -64,7 +64,7 @@ exports.add = function(data, callback){
 				});
 	    	}else{
 
-	    		callback("same gamer");
+	    		callback("same user");
 	    	}
 	    }
 	});
@@ -73,25 +73,25 @@ exports.add = function(data, callback){
 
 // enter username get id(username is also unique)
 exports.getuserId = function(username, callback){
-	exports.findByusername(username, function(error, gamer){
+	exports.findByusername(username, function(error, user){
 	    if(error) {
 	        // console.log("FATAL " + error);
 	        callback("error", error);
 	    } else {
-	    	// console.log("id"+gamer);
-	    	callback(null, gamer.userId)
+	    	// console.log("id"+user);
+	    	callback(null, user.userId)
 	    }
 	});
 }
 exports.online = function(username, callback){
-	exports.findByusername(username, function(error, gamer){
+	exports.findByusername(username, function(error, user){
 	    if(error) {
 	        callback("error", error);
 	    } else {
 	    	callback(null, {
-	    		userId: gamer.userId,
-	    		username: gamer.username,
-	    		score: gamer.score
+	    		userId: user.userId,
+	    		username: user.username,
+	    		score: user.score
 	    	});
 	    }
 	});
@@ -100,25 +100,25 @@ exports.online = function(username, callback){
 
 // verification of login
 exports.login = function(data, callback){
-	exports.findByusername(data.username, function(error, gamer){
+	exports.findByusername(data.username, function(error, user){
 	    if(error) {
 	        console.log("FATAL " + error);
 	        callback("error", error);
 	    } else {
-	    	console.log(gamer);
-	    	callback(null, gamer.password);
+	    	console.log(user);
+	    	callback(null, user.password);
 	    }
 	});
 }
 
 // delete the user
 exports.delete = function(id, callback){
-	exports.findGamerById(id, function(error, gamer){
+	exports.findUserById(id, function(error, user){
 		if(error){
 			callback(error)
 		}else{
 			console.log("delete success");
-			gamer.remove();
+			user.remove();
 			callback(null);
 		}
 	});
@@ -126,13 +126,13 @@ exports.delete = function(id, callback){
 
 // add a score
 exports.saveScore = function(id, score, callback){
-	exports.findGamerById(id, function(error, gamer){
+	exports.findUserById(id, function(error, user){
 		if(error){
 			callback(error);
 		}else{
-			gamer.modifydate = new Date();
-			gamer.score = score;
-			gamer.save(function(error){
+			user.modifydate = new Date();
+			user.score = score;
+			user.save(function(error){
 				if(error){
 					console.log("FATAL " + error);
 					callback(error);
@@ -145,29 +145,60 @@ exports.saveScore = function(id, score, callback){
 }
 
 
-exports.allGamers = function(callback){
+exports.allUsers = function(callback){
 	User.find({}, callback);
 }
 
 
 //finding data by id
-var findGamerById = exports.findGamerById = function(id, callback){
-    User.findOne({_id: id}, function(error, gamer){
+var findUserById = exports.findUserById = function(id, callback){
+    User.findOne({_id: id}, function(error, user){
         if(error){
             console.log('FATAL ' + error);
             callback(error, null);
         }
-        callback(null, gamer);
+        callback(null, user);
     });
 }
 
 // finding data by name
 exports.findByusername = function(username, callback) {
-    User.findOne({username: username}, function(error, gamer){
+    User.findOne({username: username}, function(error, user){
         if(error){
             console.log('FATAL ' + error);
             callback(error, null);
         }
-        callback(null, gamer);
+        callback(null, user);
     });
+}
+/***************ROOM OPERATIONS***********************/
+
+var roomEntity=new Room();
+
+exports.addRoom=function(data,callback){
+	roomEntity.name = data.name;
+	roomEntity.createdBy = data.createdBy;
+	// if somebody is registered with this username, it should not be used yet again
+	exports.findByRoomName(data.name, function(error, room){
+			if(error){
+				console.log(error);
+			}
+			if(!room){
+				roomEntity.save(function(error){
+			if(error){
+				console.log("error in creating room" + error);
+			}else{
+				console.log("*****************");
+				console.log(roomEntity.name);
+				console.log(userEntity.createdBy);
+				console.log("*****************");
+				callback(null);
+			}
+		});
+}
+});
+}
+
+exports.allRooms = function(callback){
+	Room.find({}, callback);
 }
