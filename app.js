@@ -98,7 +98,7 @@ app.use(router);
 /*****************************************************/
 
   io.sockets.on("connection", function(socket){
-
+    console.log("******connected*****");
   	// when a user connects to websockets
   	 socket.on("online", function(data){
       		var data = JSON.parse(data);
@@ -114,7 +114,7 @@ app.use(router);
       		clients[data.username] = socket;
 
       		// send to everzone that the user is online
-      		socket.broadcast.emit("system message", "【" + name + "】已经进入房间", "add");
+      		socket.broadcast.emit("system message", "【" + name + "] is online", "add");
 
       		// update data of users in the room
           // and u
@@ -128,6 +128,7 @@ app.use(router);
 
   	// get user data on the network
   	function getOnline(){
+
   		 game.online(users, function(list){
   			for(var index in clients){
   				clients[index].emit("online list", list);
@@ -142,9 +143,14 @@ app.use(router);
   		clients[name].emit("player data", data);
   	}
 
+/**********************ROOM SECTION**********************/
+        socket.on("create room ",function(){
+          //
+
+        });
     /*********************CHAT SECTION******************************/
     	//PUBLIC INFO
-    	socket.on("public message", function(avatorId, name, msg, callback){
+    	socket.on("public message", function(userId, name, msg, callback){
     		callback(true);
 
     		if(msg != GameVariable.word[0]){

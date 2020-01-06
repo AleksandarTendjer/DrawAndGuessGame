@@ -69,6 +69,7 @@ $(function() {
 		form.addClass('was-validated');
 	});
 });
+
 function registrationFun(data)
 {
   var username=data.username.value;
@@ -86,7 +87,7 @@ function registrationFun(data)
         //redirect to login
         debugger;
           alert("The user has been succesfully created! ");
-          
+
           window.location.assign('http://localhost:3000/');
         //change the value of the field that was changed
         //  location.reload();
@@ -97,4 +98,17 @@ function registrationFun(data)
 
   });
 
+}
+function loginFun(data)
+{
+  var username=data.username.value;
+  var password=data.password.value;
+
+//add user
+  $.post({
+      type: 'POST',
+      url: 'http://localhost:3000/users/login/',
+    //  contentType: "application/json",
+  data: {username:username,password:password},//JSON.stringify(Status),
+});
 }

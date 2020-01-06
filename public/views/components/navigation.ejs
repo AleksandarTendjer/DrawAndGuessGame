@@ -1,0 +1,21 @@
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <ul>
+      <% for( var i = 0; i < rooms.length; i++){ %>
+        <li class="item" id="item__<%=rooms[i].name  %>">
+
+          <a class="item__name" id="item__name<%= rooms[i].name %>"  onclick="debugger;enterRoom();" >
+            <%= rooms[i].name %>
+          <% }%>
+        </li>
+      <% } %>
+      </ul>
+    </div>
+  </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>

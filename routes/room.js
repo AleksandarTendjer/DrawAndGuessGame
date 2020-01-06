@@ -24,7 +24,12 @@
  			return next(error);
  		}else {
        {
-         res.render('../views/rooms.ejs',{rooms:rooms});
+         console.log('*************');
+         console.log('ALL ROOMS');
+         console.log(rooms);
+         console.log('*************');
+         //add to send a user also
+         res.render('../views/loggedIn.ejs',{rooms:rooms});
        }
      }
    }) ;

@@ -1,0 +1,44 @@
+.item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  padding: 1em 2em;
+  cursor: pointer;
+  margin: auto;
+}
+
+.item li {
+  list-style: none !important;
+}
+
+  .item:hover, .item:focus {
+  color: #6f1a07;
+  background-color: hsl(11, 20%, 80%);
+  }
+
+      .item:hover .item__option, .item:focus .item__option {
+      --spacing: 1em;
+
+      width: auto;
+      opacity: 1;
+      pointer-events: inherit;
+    }
+
+  .item:not(:first-child) {
+    border-top: 1px solid hsl(11, 20%, 80%);
+  }
+
+  .item--no_hover:hover, .item--no_hover:focus {
+    background-color: transparent;
+  }
+
+  .item__icon {
+    margin-right: 0.6em;
+  }
+
+  .item__name {
+    flex: 1 0;
+    padding-left: 10px;
+    margin: auto;
+  }

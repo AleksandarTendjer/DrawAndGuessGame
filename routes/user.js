@@ -32,6 +32,39 @@
 
 
   } );
+  router.post('/login/',async function(req,res,next){
+    var username = req.body.username;
+    var password = req.body.password;
+    res.cookie("username", username);
+
+    var data = {
+      username: username
+    }
+    db.login(data,async  function(error, db_psw){
+      if(error){
+        console.log("error: "+ error);
+      }else{
+        if(password == db_psw){
+          console.log("success logging in !");
+          await db.allRooms(function(error,rooms)
+        {
+          if(error){
+            console.log("error: "+ error);
+          }else{
+          res.render("/loggedIn",{username:data.username,rooms:rooms});
+        }
+      });
+          //res.redirect("/index");
+        }else{
+          res.send({
+            type: "error psw"
+          });
+          return false;
+        }
+      }
+    });
+
+  });
   router.post('/', async  function(req, res, next) {
   console.log('***post user**');
  console.log(req.body);
