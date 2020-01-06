@@ -42,7 +42,11 @@ exports.emptyData = {}
 exports.add = function(data, callback){
 	userEntity.username = data.username;
 	userEntity.password = data.password;
-	userEntity.userId = data.userId;
+//	userEntity.userId = data.userId;
+	console.log("data to insert");
+	console.log(data);
+	console.log("User entity");
+	console.log(userEntity);
 
 	// if somebody is registered with this username, it should not be used yet again
 	exports.findByusername(data.username, function(error, user){
@@ -57,7 +61,7 @@ exports.add = function(data, callback){
 						console.log("*****************");
 						console.log(userEntity.username);
 						console.log(userEntity.password);
-						console.log(userEntity.userId);
+	//					console.log(userEntity.userId);
 						console.log("*****************");
 						callback(null);
 					}

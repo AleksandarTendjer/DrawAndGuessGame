@@ -1,4 +1,4 @@
-<form method="POST" class="my-login-validation" novalidate="">
+<form method="POST" class="my-login-validation" novalidate="" onsubmit="event.preventDefault();debugger;registrationFun(this);">
 								<div class="form-group">
 									<label for="name">Name</label>
 									<input id="name" type="text" class="form-control" name="username" required autofocus>
@@ -8,7 +8,7 @@
 								</div>
 
 								<div class="form-group">
-									<label for="email">E-Mail Address</label>
+									<label for="email">E-Mail Address or username</label>
 									<input id="email" type="email" class="form-control" name="email" required>
 									<div class="invalid-feedback">
 										Your email is invalid

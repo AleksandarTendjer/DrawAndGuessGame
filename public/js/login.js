@@ -36,7 +36,7 @@ $(function() {
 			type: 'hidden',
 			id: 'passeye-' + i
 		}));
-
+    debugger;
 		var invalid_feedback = $this.parent().parent().find('.invalid-feedback');
 
 		if(invalid_feedback.length) {
@@ -69,3 +69,32 @@ $(function() {
 		form.addClass('was-validated');
 	});
 });
+function registrationFun(data)
+{
+  var username=data.username.value;
+  var password=data.password.value;
+
+//add user
+  $.post({
+      type: 'POST',
+      url: 'http://localhost:3000/users/',
+    //  contentType: "application/json",
+  data: {username:username,password:password},//JSON.stringify(Status),
+    //dataType: "json",
+      //$.toJSON({ sendData: dataPackage })
+      success: function(data){
+        //redirect to login
+        debugger;
+          alert("The user has been succesfully created! ");
+          
+          window.location.assign('http://localhost:3000/');
+        //change the value of the field that was changed
+        //  location.reload();
+    },          error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    debugger;
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                }
+
+  });
+
+}

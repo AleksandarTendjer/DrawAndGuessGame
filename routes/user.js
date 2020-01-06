@@ -35,17 +35,19 @@
   router.post('/', async  function(req, res, next) {
   console.log('***post user**');
  console.log(req.body);
-
+  req.body.userId=mongoose.Types.ObjectId();
   var data=req.body;
 
     await db.add(data,function(error, user){
       if(error){
+        console.log(error);
         return next(error);
       }else {
-        {
+        console.log("user was created with these credentials:");
+          console.log(user);
           //send the created room
           res.send(user);
-        }
+
       }
     }) ;
     //console.log(responseList);
