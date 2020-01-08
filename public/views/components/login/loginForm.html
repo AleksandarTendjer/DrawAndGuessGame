@@ -1,4 +1,4 @@
-<form method="POST" class="my-login-validation" novalidate="" onsubmit="event.preventDefault();debugger;loginFun();">
+<form method="POST" class="my-login-validation" novalidate="" onsubmit="event.preventDefault();loginFun(this.email.value,this.password.value);">
   <div class="form-group">
     <!--ON THE BACKEND WE WILL ONLY USE USERNAME  -->
     <label for="email">E-Mail Address or username</label>

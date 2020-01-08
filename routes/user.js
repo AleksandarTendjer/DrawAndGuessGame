@@ -33,25 +33,38 @@
 
   } );
   router.post('/login/',async function(req,res,next){
+    console.log("******login*****");
     var username = req.body.username;
     var password = req.body.password;
+    console.log("username");
+      console.log(username);
+      console.log("password");
+      console.log(password);
+
     res.cookie("username", username);
 
     var data = {
       username: username
     }
+
     db.login(data,async  function(error, db_psw){
       if(error){
         console.log("error: "+ error);
       }else{
         if(password == db_psw){
+
           console.log("success logging in !");
           await db.allRooms(function(error,rooms)
         {
+
           if(error){
             console.log("error: "+ error);
           }else{
-          res.render("/loggedIn",{username:data.username,rooms:rooms});
+            console.log("going to the index");
+          //res.render("/index",{username:data.username,rooms:rooms});
+        //  res.sendfile("views/index");//,{username:username,rooms:rooms});
+        //  res.render('index');
+        	res.redirect("/index");
         }
       });
           //res.redirect("/index");

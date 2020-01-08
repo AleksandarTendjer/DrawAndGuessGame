@@ -89,7 +89,7 @@ app.use('/rooms', room);
   app.use(methodOverride('X-HTTP-Method-Override'));
 
   //app.use(app.router);	// handler for post methods
-app.use(router);
+	app.use(router);
 
   app.use(express.static(path.join(__dirname, "public")));
 
@@ -455,6 +455,37 @@ app.get("/", function(req, res){
 	}
 	res.redirect("/index");
 });
+
+
+//the one that is used after the login
+app.get("/index", function(req, res){
+	console.log("entered the index");
+
+	if(!req.headers.cookie){
+		res.redirect("/login");
+		return false;
+	}
+	var cookies = req.headers.cookie.split("; ");
+		console.log(cookies);
+	var isSign = false;
+	for(var i=0; i<cookies.length; i++){
+		cookie = cookies[i].split("=");
+		if(cookie[0]=="username" && cookie[1]!=""){
+			isSign = true;
+			break;
+		}
+	}
+
+	if(!isSign){
+		res.redirect("/login");
+		return false;
+	}
+	console.log("about to send the index");
+	res.sendfile(path.resolve("public/views/index.html"));
+});
+
+
+
 
 app.get("/login", function(req, res){
 	//res.sendfile(path.resolve("views/login.html"));

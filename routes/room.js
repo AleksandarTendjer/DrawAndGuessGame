@@ -29,7 +29,7 @@
          console.log(rooms);
          console.log('*************');
          //add to send a user also
-         res.render('../views/loggedIn.ejs',{rooms:rooms});
+         res.render('../views/index.ejs',{rooms:rooms});
        }
      }
    }) ;

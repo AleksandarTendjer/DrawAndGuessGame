@@ -1,0 +1,185 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Draww and Guess Game</title>
+	<link rel="stylesheet" href="./css/canvas.css">
+	<link rel="stylesheet" href="./css/index.css">
+	<link rel="stylesheet" href="./css/loading.css">
+
+</head>
+<div class="wrapper">
+	<header id="header">
+		<h1 class="logo"></h1>
+		<div class="player">
+			<img class="avatorId" value="1" src="./img/login.png" class="player_portait">
+			<span class="name" title="username">username</span>
+			<i class="exit icon" title="log out"></i>
+		</div>
+	</header>
+
+<!--LOADING VISUAL EFFECT -->
+<!--	<div class="loader">
+		<div class="loading">
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+		<span>connecting to the server...</span>
+	</div> -->
+
+	<!-- s: #container -->
+	<div id="container" class="cf">
+		<section id="main">
+			<div class="canvas_title section_title icon">Drawing board <span class="give_up">give up drawing</span></div>
+			<div id="content">
+				<div class="content_inner">
+
+					<ul class="content_tip">
+						<li class="li_tip icon game_tip">game tips</li>
+						<!-- <li class="li_tip turn_game_tip icon game_tip">绘画主题：</li> -->
+						<li class="li_tip icon game_title">room</li>
+						<li class="li_tip icon game_time">60</li>
+					</ul>
+
+					<div id="draw">
+						<div class="draw_tool">
+							<div id="draw_logo"><i class="dot_color"></i>drawing board tools</div>
+
+							<ul class="draw_controller cf">
+								<li class="normal pencil active" title="pencil"></li>
+								<li class="normal handwriting" title="graphite"></li>
+								<li class="normal linesize showLine" title="line size"></li>
+								<li class="normal showColor" id="chooseColor" title="colors"></li>
+								<li class="normal rubber" title="rubber"></li>
+
+								<span>|</span>
+
+								<li class="normal line" title=" line"></li>
+								<li class="normal square" title=" square"></li>
+								<li class="normal circle" title="circle"></li>
+								<li class="normal fill" title="fill"></li>
+
+								<span>|</span>
+
+								<li class="normal cancel" title="undo"></li>
+								<li class="normal next" title="redo"></li>
+								<li class="normal clearContext" title="clear screen"></li>
+								<li class="normal downloadImage" title="download"><a href="javascript:;" download="picture.png" id="downloadImage_a"></a></li>
+							</ul>
+
+							<ul class="draw_turn">
+							<!--in room users area -->
+							</ul>
+						</div>
+
+						<!-- line thickness -->
+						<div id="line_size" class="line_size normal">
+							<ul>
+								<li><button data-value="1" class="small selected"><span style="width: 2px; height: 2px;"></span></button></li>
+								<li><button data-value="3" class="small"><span style="width: 4px; height: 4px;"></span></button></li>
+								<li><button data-value="5"><span style="width: 8px; height: 8px;"></span></button></li>
+								<li><button data-value="7"><span style="width: 10px; height: 10px;"></span></button></li>
+							</ul>
+						</div>
+						<!-- #line_size -->
+
+						<!-- Drawing board -->
+						<div class="canvas_container">
+							<canvas id="canvas">The browser does not support canvas,try using Chrome or versions of browser later than 2015</canvas>
+							<canvas id="canvas_bak">The browser does not support canvas,try using Chrome or versions of browser later than 2015</canvas>
+
+
+							<!-- tool -->
+
+							<!-- 分数点评 -->
+							<!-- <div class="s_shoe">
+								<div class="s_shoe_wrapper">
+									<div class="front_shoe icon"> </div>
+									<div class="back_shoe icon"></div>
+								</div>
+								<div class="s_shoe_shadow icon"></div>
+							</div> -->
+
+							<!-- 鲜花 -->
+							<!-- <div class="s_flower icon"></div> -->
+
+							<!-- 鸡蛋 -->
+							<!-- <div class="s_egg">
+								<div class="s_egg_wrapper">
+									<div class="front_egg icon"></div>
+									<div class="back_egg icon"></div>
+								</div>
+								<div class="s_egg_shadow icon">
+									<div class="s_egg_boom icon"></div>
+								</div>
+							</div> -->
+
+
+						</div>
+
+
+
+
+					</div>
+					<!-- #draw -->
+				</div>
+				<!-- .content_inner -->
+			</div>
+			<!-- #content -->
+		</section>
+		<!---CHAT AREA-->
+		<section id="chat">
+			<header class="chat_title section_title icon">Chat record</header>
+			<div class="clear_chat icon" title="clear chat history"></div>
+			<article class="chat_content_wrap cf">
+				<div class="chat_content_inner">
+
+				<div class="chat_message type_me cf">
+					<img src="img/login.png" />
+					<p class="info"><span class="author">Aleksandar Tendjer</span><span class="time">13:01:45</span></p>
+					<p class="message"></p>
+				</div>
+
+
+				<!-- .chat_content_inner -->
+				</div>
+			</article>
+
+			<!-- Custom scroll bar  -->
+			 <div class="scroller-container">
+                <div class="scrollbar"></div>
+            </div>
+
+			<footer class="chat_input cf">
+				<input type="text" class="message_input" id="message_input" placeholder="enter text " />
+				<input type="button" class="chat_btn" value="send" title="ENTER message">
+				<i class="show_online icon" title="view people online"></i>
+			</footer>
+		</section>
+
+		<section id="online">
+			<header class="online_title section_title icon">online users </header>
+			<section class="online_list">
+
+			</section>
+		</section>
+	</div>
+  </div>
+  <script src="./js/sea.js"></script>
+  <script src="./js/socket.js"></script>
+  <script>
+  	seajs.use("./js/app.js", function(app){
+  		app.init();
+  	});
+  	seajs.config({
+  		base: "./js/",
+  		charset: "utf-8",
+  		timeout: 20000,
+  		debug: true
+  	});
+  </script>

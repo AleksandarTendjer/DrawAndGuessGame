@@ -99,10 +99,10 @@ function registrationFun(data)
   });
 
 }
-function loginFun(data)
+function loginFun(username,password)
 {
-  var username=data.username.value;
-  var password=data.password.value;
+	debugger;
+	//username or password(mainly username for now )
 
 //add user
   $.post({

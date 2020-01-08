@@ -6,7 +6,7 @@
  */
 
 
-var dburl = 'mongodb://localhost:27017/ToDoDatabase' // link  to MongoDB
+var dburl = 'mongodb://localhost:27017/DrawAndGuessGame' // link  to MongoDB
 
 
 var mongoose = require('mongoose');
@@ -104,11 +104,15 @@ exports.online = function(username, callback){
 
 // verification of login
 exports.login = function(data, callback){
+	console.log("****db operations login*****");
 	exports.findByusername(data.username, function(error, user){
-	    if(error) {
+		console.log("done finding te user");
+			if(error) {
 	        console.log("FATAL " + error);
 	        callback("error", error);
 	    } else {
+				//the user is null
+				console.log("found the user");
 	    	console.log(user);
 	    	callback(null, user.password);
 	    }
