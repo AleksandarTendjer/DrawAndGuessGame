@@ -4,9 +4,11 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Draww and Guess Game</title>
+	<title>Draw and Guess Game</title>
 	<link rel="stylesheet" href="./css/canvas.css">
+	<link rel="stylesheet" href="./css/jquery.bigcolorpicker.css">
 	<link rel="stylesheet" href="./css/index.css">
+	<link rel="stylesheet" href="./css/effect.css">
 	<link rel="stylesheet" href="./css/loading.css">
 
 </head>
@@ -21,7 +23,7 @@
 	</header>
 
 <!--LOADING VISUAL EFFECT -->
-<!--	<div class="loader">
+	<div class="loader">
 		<div class="loading">
 			<div class="dot"></div>
 			<div class="dot"></div>
@@ -30,9 +32,9 @@
 			<div class="dot"></div>
 		</div>
 		<span>connecting to the server...</span>
-	</div> -->
+	</div>
 
-	<!-- s: #container -->
+	<!-- #container -->
 	<div id="container" class="cf">
 		<section id="main">
 			<div class="canvas_title section_title icon">Drawing board <span class="give_up">give up drawing</span></div>
@@ -96,20 +98,20 @@
 
 							<!-- tool -->
 
-							<!-- 分数点评 -->
-							<!-- <div class="s_shoe">
+							<!-- Score reviews -->
+							 <div class="s_shoe">
 								<div class="s_shoe_wrapper">
 									<div class="front_shoe icon"> </div>
 									<div class="back_shoe icon"></div>
 								</div>
 								<div class="s_shoe_shadow icon"></div>
-							</div> -->
+							</div>
 
 							<!-- 鲜花 -->
-							<!-- <div class="s_flower icon"></div> -->
+							 <div class="s_flower icon"></div>
 
 							<!-- 鸡蛋 -->
-							<!-- <div class="s_egg">
+							 <div class="s_egg">
 								<div class="s_egg_wrapper">
 									<div class="front_egg icon"></div>
 									<div class="back_egg icon"></div>
@@ -117,7 +119,7 @@
 								<div class="s_egg_shadow icon">
 									<div class="s_egg_boom icon"></div>
 								</div>
-							</div> -->
+							</div>
 
 
 						</div>
@@ -169,13 +171,16 @@
 			</section>
 		</section>
 	</div>
+
   </div>
   <script src="./js/sea.js"></script>
   <script src="./js/socket.js"></script>
-  <script>
+
+	<script>
   	seajs.use("./js/app.js", function(app){
   		app.init();
   	});
+		debugger;
   	seajs.config({
   		base: "./js/",
   		charset: "utf-8",

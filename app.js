@@ -481,6 +481,7 @@ app.get("/index", function(req, res){
 		return false;
 	}
 	console.log("about to send the index");
+//	res.render(path.resolve("public/views/index.html"),{rooms:rooms})
 	res.sendfile(path.resolve("public/views/index.html"));
 });
 

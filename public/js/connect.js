@@ -3,19 +3,22 @@
 		io = require("socket"),
 		socket = io.connect(),
 		JSON = require("json2"),
-		Chat = require("chat"),
+		//Chat = require("chat"),
 		cookie = require("jquery.cookie"),
-		Draw = require("draw"),
+		//Draw = require("draw"),
 		Main = require("main");
 
 	var listener = function(){
+    
+    console.log("entered when on index  entry ! ");
+    debugger;
+		var from = $.cookie("username"),
+			userId = $.cookie("avatorId");
 
-		var from = $.cookie("nickname"),
-			avatorId = $.cookie("avatorId");
 
-		// 1. 消息管理
-		// 上线
-		socket.emit("online", JSON.stringify({nickname: from, avatorId: avatorId}));
+		// 1. when the user connects(socket emits online status)
+
+		socket.emit("online", JSON.stringify({username: from/*, avatorId: avatorId */}));
 
 		// successfully connected to the server
 		socket.on("connect", function(){
@@ -29,15 +32,15 @@
 		});
 
 		// receive a public message
-		socket.on("public message", function(avatorId, name, msg){
+		socket.on("public message", function(/*avatorId,*/ name, msg){
 			var data = {"userId": userId, "from": name, "msg": msg},
 				type = {"item": "normal", "detail": "other"};
 			Chat.showMessage(data, type);
 		});
 
 		// receve a private message
-		socket.on("private message", function(from, avatorId, msg){
-			var data = {"userId": userId, "from": from, "msg": msg},
+		socket.on("private message", function(from /*, avatorId*/, msg){
+			var data = {/*"userId": userId,*/ "from": from, "msg": msg},
 				type = {"item": "normal", "detail": "other"};
 			Chat.showMessage(data, type);
 		});
@@ -59,7 +62,7 @@
 
 		// send message failed
 		socket.on("message error", function(to, msg){
-			var data = {"userId": userId, "from": "system, "msg": "sending message 【" + to + "】was“" + msg + "”unsucsesfull！"},
+			var data = {/*"userId": userId,*/ "from": "system", "msg": "sending message 【" + to + "】was“" + msg + "”unsucsesfull！"},
 				type = {"item": "notice", "detail": "sub"};
 			Chat.showMessage(data, type);
 		});

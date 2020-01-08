@@ -281,14 +281,14 @@ textarea::-moz-placeholder {
   width: 840px;
   height: 540px;
   margin: 0 auto;
-  background: url(../images/canvas_bg.png) no-repeat;
+  background: url(../img/canvas_bg.png) no-repeat;
 }
 canvas {
   position: absolute;
   z-index: 0;
   left: 0px;
   top: 0px;
-  cursor: url(../images/cursor.gif) 2 2, crosshair;
+  cursor: url(../imag/cursor.gif) 2 2, crosshair;
 }
 .color {
   width: 152px;

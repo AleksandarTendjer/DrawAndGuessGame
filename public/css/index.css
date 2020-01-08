@@ -1,11 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 /*------- reset -------*/
-/*
-Theme Name: xuanfeng
-Date:2013/10/01;
-Version:2.0;
-*/
+
 html,
 body,
 div,
@@ -93,7 +89,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-/* HTML5标签初始化 
+/* HTML5标签初始化
 --------------------------------------------------*/
 article,
 aside,
@@ -108,12 +104,12 @@ nav,
 section {
   display: block;
 }
-/* 标签初始化 
+/* 标签初始化
 --------------------------------------------------*/
 body {
   line-height: 1;
   color: #333;
-  font: 14px/1.5 "微软雅黑", Arial, Helvetica, Verdana, sans-serif;
+  font: 14px/1.5 "Microsoft Yahei", Arial, Helvetica, Verdana, sans-serif;
 }
 ol,
 ul {
@@ -174,15 +170,13 @@ a:hover {
 div {
   display: block;
 }
-/* 解决Google浏览器字体不小于12px的问题
---------------------------------------------------*/
 html {
   -webkit-text-size-adjust: none;
 }
 a:focus {
   outline: none;
 }
-/*让position:fixed在IE6下可用! */
+/*Make position: fixed  */
 * html,
 * html body {
   background-image: url(about:blank);
@@ -271,18 +265,7 @@ textarea::-moz-placeholder {
   white-space: -moz-pre-wrap;
   word-wrap: break-word;
 }
-/* 四角的半径定制 */
-/* 用法 */
-/* Mixin */
-/* 用法 */
-/* 转换/旋转 */
-/* 用法 */
-/* 线性渐变 */
-/* 用法 */
-/* 快速渐变 */
-/* 用法 */
-/* 镜像效果 */
-/* 用法 */
+
 .ib {
   display: inline-block;
   *zoom: 1;
@@ -313,7 +296,7 @@ body {
   -o-transition: all 0.8s ease-in-out;
   transition: all 0.8s ease-in-out;
   text-indent: -999em;
-  background: url(../images/logo.png);
+  background: url(../img/logo.png);
 }
 #header .player {
   float: right;
@@ -661,7 +644,7 @@ body {
   background-position: -400px -90px;
 }
 .icon {
-  background-image: url(../images/icon.png);
+  background-image: url(../img/icon.png);
   background-repeat: no-repeat;
 }
 .clear_chat {

@@ -1,0 +1,403 @@
+@charset "utf-8";
+/* CSS Document */
+/*------- reset -------*/
+/*
+Author:
+Description: This css document iniializes the index of the document
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* html tag initialization
+--------------------------------------------------*/
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+/* Tag initialization
+--------------------------------------------------*/
+body {
+  line-height: 1;
+  color: #333;
+  font: 14px/1.5 "微软雅黑", Arial, Helvetica, Verdana, sans-serif;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+  border-left: solid 4px #39c;
+  margin-left: 10px;
+  padding-left: 10px;
+  background: whitesmoke;
+  margin: 10px auto;
+  padding: 6px 10px;
+  color: #666;
+  font-size: 20px;
+}
+i {
+  font-style: normal;
+  font-weight: normal;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a img {
+  border: 0;
+}
+h1 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 20px;
+}
+h3 {
+  font-size: 18px;
+}
+h4 {
+  font-size: 14px;
+}
+h5,
+h6 {
+  font-size: 12px;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+div {
+  display: block;
+}
+/* 解决Google浏览器字体不小于12px的问题
+--------------------------------------------------*/
+html {
+  -webkit-text-size-adjust: none;
+}
+a:focus {
+  outline: none;
+}
+/*Make poosition fixed */
+* html,
+* html body {
+  background-image: url(about:blank);
+  background-attachment: fixed;
+}
+body {
+  font: 14px/1.5 "Microsoft YaHei", Arial, Helvetica, sans-serif;
+  color: #2b2b2b;
+  overflow: visible;
+}
+a {
+  color: #39c;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+a {
+  *outline: none;
+}
+a:active {
+  *star: expression(this.onFocus=this.blur());
+}
+a:focus {
+  *outline: 0;
+}
+.fl {
+  float: left;
+  display: inline;
+}
+.fr {
+  float: right;
+  display: inline;
+}
+.cf {
+  display: block;
+  zoom: 1;
+}
+*html .cf {
+  height: 1%;
+}
+.cf:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.cf {
+  *zoom: 1;
+}
+.placeholder {
+  color: #888888;
+}
+input::-webkit-input-placeholder {
+  color: #888888;
+}
+input::-moz-placeholder {
+  color: #888888;
+}
+textarea::-webkit-input-placeholder {
+  color: #888888;
+}
+textarea::-moz-placeholder {
+  color: #888888;
+}
+.text-autocut {
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-text-overflow: ellipsis;
+  -khtml-text-overflow: ellipsis;
+  -icab-text-overflow: ellipsis;
+  -moz-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.text-hide {
+  display: block;
+  font-size: 0;
+  text-indent: -99999em;
+  color: transparent;
+}
+.wrap {
+  text-wrap: wrap;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  word-wrap: break-word;
+}
+/* Customize the radius of the four corners * /
+/* Usage * /
+/* Mixin * /
+/ * Transform / Rotate * /
+/ * Linear gradient * /
+/ * Quick Fade * /
+/ * Mirror effect * /
+/ * Usage */
+.ib {
+  display: inline-block;
+  *zoom: 1;
+  vertical-align: top;
+}
+#container {
+  display: block;
+}
+.loader {
+  display: none;
+}
+button {
+  float: left;
+  display: none;
+}
+
+.score_wrapper {
+  position: absolute;
+  top: 300px;
+  left: 400px;
+  height: auto;
+  padding: 10px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+}
+.score_wrapper .score_head {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  background: whitesmoke;
+}
+.score_wrapper .score_head .score_title {
+  line-height: 40px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+.score_wrapper .score_head .score_time {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 80px;
+  color: #ccc;
+}
+.score_wrapper .scrore_inner {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.score_wrapper li {
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  border-bottom: solid 1px #E4E4E4;
+  border-top: solid 1px #FFF;
+}
+.score_wrapper li:nth-child(even) {
+  background: #f5f5f5;
+}
+.score_wrapper li:nth-child(odd) {
+  background: #fff;
+}
+.score_wrapper .score_count {
+  float: left;
+  width: 80px;
+  height: 60px;
+  text-align: center;
+  margin: 10px 0 0 0;
+  font-size: 18px;
+  line-height: 80px;
+  color: #d62629;
+}
+.score_wrapper .score_count::after {
+  content: "分";
+  color: #333;
+  font-size: 14px;
+}
+.score_wrapper img {
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin: 10px 0 0 0;
+  border: solid 1px #39c;
+  box-shadow: 0 0 4px #39c;
+}
+.score_wrapper .score_name {
+  float: left;
+  font-size: 14px;
+  line-height: 80px;
+  color: #333;
+  margin: 0 40px 0 10px;
+  max-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-text-overflow: ellipsis;
+  -khtml-text-overflow: ellipsis;
+  -icab-text-overflow: ellipsis;
+  -moz-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.score_wrapper .score_flower {
+  background-position: -330px -230px;
+}
+.score_wrapper .score_egg {
+  background-position: -325px -340px;
+}
+.score_wrapper .score_shoe {
+  background-position: -318px -280px;
+}
+.score_wrapper .score_tool {
+  float: left;
+  width: 60px;
+  height: 40px;
+  margin: 20px 12px auto 0px;
+  line-height: 40px;
+  text-indent: 30px;
+}
+.wrapper #header .player {
+  display: block;
+}

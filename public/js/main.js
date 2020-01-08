@@ -5,9 +5,9 @@
 define(function(require, exports, module){
 	var $ =require("jquery"),
 		io = require("socket"),
-		//JSON = require("json2"),
+		JSON = require("json2"),
 		socket = io.connect(),
-		Effect = require("effect"),
+		//Effect = require("effect"),
 		EJS = require("ejs");
 
 	//timer definitions
@@ -135,7 +135,7 @@ define(function(require, exports, module){
 		}, 1400);
 
 		console.log(data);
-
+		console.log("tool js ");
 		// show results
 		var html = new EJS({url: "./views/tool.ejs"}).render({score: data});
 		$(".canvas_container").append(html);
@@ -174,6 +174,8 @@ define(function(require, exports, module){
 		playAudio(4);
 
 		console.log(data);
+		console.log("score ejs");
+
 		// show scores
 		var html = new EJS({url: "./views/score.ejs"}).render({player: data});
 		$("body").append(html);
@@ -194,6 +196,7 @@ define(function(require, exports, module){
 
 	// show room information
 	function showRoom(list){
+		debugger;
 		var html = new EJS({url: "./views/room.ejs"}).render({user: list});
 		$(".room_wrapper").remove();
 		$(".canvas_container").append(html);
@@ -218,7 +221,7 @@ define(function(require, exports, module){
         }
     }
 
-    // play the audio 
+    // play the audio
     function playAudio(i){
 		try{
 			// if(i != 3){
@@ -254,16 +257,17 @@ define(function(require, exports, module){
 			type: audio_msg,
 			audio: audio
 		}
-		var html = new EJS({url: "./views/audio.ejs"}).render({media: data});
-		$("body").append(html);
+		//var html = new EJS({url: "./views/audio.ejs"}).render({media: data});
+		//$("body").append(html);
 	}
 
 	function correctAnswer(){
 		playAudio(8);
 	}
 
-	// 事件绑定初始化
+	// event binding
 	var eventInit = function(){
+		debugger;
 		// 点击开始游戏-每一局的入口
 		$(".canvas_container").on("click", ".room_game_start", function(){
 			socket.emit("start game", function(){
@@ -324,6 +328,7 @@ define(function(require, exports, module){
 	}
 
 	function test(){
+		console.log("tool ejs");
 		var html = new EJS({url: "./views/tool.ejs"}).render({score: {num: 1, word: "歪密"}});
 		$(".canvas_container").append(html);
 	}
@@ -349,6 +354,7 @@ define(function(require, exports, module){
 
 	var Main = {
 		init: function(){
+			debugger;
 			eventInit();
 			// test();
 			audioInit();
