@@ -3,21 +3,19 @@
 		io = require("socket"),
 		socket = io.connect(),
 		JSON = require("json2"),
-		//Chat = require("chat"),
+		Chat = require("chat"),
 		cookie = require("jquery.cookie"),
 		//Draw = require("draw"),
 		Main = require("main");
-
+//defining the event listener- for Chat and in-game Main socket events!!!!
 	var listener = function(){
-    
-    console.log("entered when on index  entry ! ");
     debugger;
 		var from = $.cookie("username"),
 			userId = $.cookie("avatorId");
 
 
 		// 1. when the user connects(socket emits online status)
-
+    console.log("entered app.js and emmiting online status with socket  ! ");
 		socket.emit("online", JSON.stringify({username: from/*, avatorId: avatorId */}));
 
 		// successfully connected to the server

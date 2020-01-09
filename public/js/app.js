@@ -13,7 +13,7 @@ define(function(require, exports, module){
 	exports.init = function(){
 
 		Connect.listen();
-		//after that we initialize the main module 
+		//after that we initialize the main module
 		Main.init();
 		debugger;
 		// Effect.init();
